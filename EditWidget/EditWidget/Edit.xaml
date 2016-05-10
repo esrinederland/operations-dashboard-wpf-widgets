@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="EditWidget.Edit" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:opsDash="clr-namespace:ESRI.ArcGIS.OperationsDashboard;assembly=ESRI.ArcGIS.OperationsDashboard"
+             xmlns:esri="http://schemas.esri.com/arcgis/client/2009" 
+             xmlns:Extensions="clr-namespace:EditWidget.Extensions"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Button IsEnabled="False" x:Name="ButtonLeft" Grid.Column="0" ToolTip="Previous item"  Height="25" Width="25" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonLeft_Click" Style= "{StaticResource ThemedButtonStyle}" Margin="2">
+            <Image Source="Images/1003.ico"/>
+        </Button>
+        <Button IsEnabled="False" x:Name="ButtonFlash" ToolTip="Flash item on map" Grid.Column="1" Height="25" Width="25" Grid.Row="0"  HorizontalAlignment="Center" Click="ButtonFlash_Click" VerticalAlignment="Center"  Style= "{StaticResource ThemedButtonStyle}"   Margin="2">
+            <Image Source="Images/1814.ico"/>
+        </Button>
+        <TextBlock Text="" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="CountLabel"  Style="{StaticResource WidgetDescriptionStyle}" />
+        
+        <Button IsEnabled="False"  x:Name="ButtonZoom" ToolTip="Zoom in to item" Visibility="Hidden" Grid.Column="3" Height="25" Width="25" Grid.Row="0"  HorizontalAlignment="Center" Click="ButtonZoom_Click" VerticalAlignment="Center"  Style= "{StaticResource ThemedButtonStyle}"   Margin="2">
+            <Image Source="Images/zoom.png"/>
+        </Button>
+        <Button IsEnabled="False" x:Name="ButtonRight" Grid.Column="4" Height="25" Width="25" Grid.Row="0" ToolTip="Next item" HorizontalAlignment="Center" Click="ButtonRight_Click" VerticalAlignment="Center"  Style= "{StaticResource ThemedButtonStyle}"   Margin="2">
+            <Image Source="Images/1004.ico"/>
+        </Button>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="5" x:Name="ErrorMessageTextBlock" Text="" Style ="{DynamicResource NoItemsTextStyle}" Foreground="{DynamicResource ThemedSecondaryTextBrush}" Visibility="Collapsed" />
+        <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" Grid.ColumnSpan="5" Template="{StaticResource ThemedScrollViewerControlTemplate}">
+            <Extensions:EsriNLFeatureDataForm x:Name="FeatureDataForm" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="5" RenderTransformOrigin="0.5,0.5" TextBoxStyle="{StaticResource ThemedTextBoxStyle}" 
+                ComboBoxStyle="{StaticResource ThemedComboBoxStyle}" CommitButtonStyle="{StaticResource ThemedButtonStyle}" DeleteButtonStyle="{StaticResource ThemedButtonStyle}" FontSize="{DynamicResource ThemedTextSize}" CommitButtonContent="Save" DeleteButtonContent="Delete"  EditEnded="FeatureDataForm_EditEnded" BeforeDelete="FeatureDataForm_BeforeDelete" Background="{DynamicResource ThemedBackgroundBrush}" Foreground="{DynamicResource ThemedForegroundBrush}" >
+            </Extensions:EsriNLFeatureDataForm>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
